@@ -21,13 +21,12 @@ app.use(
   })
 );
 
-connectDB();
-
-// Routes
 app.use("/api", userRoutes);
 app.use("/api", OtpRoutes);
 app.use("/api/trainer", TrainerRoute);
 
 const PORT = process.env.PORT || 7000;
 
-app.listen(PORT, () => console.log("Server running on", PORT));
+connectDB().then(() => {
+  app.listen(PORT, () => console.log("Server running on", PORT));
+});

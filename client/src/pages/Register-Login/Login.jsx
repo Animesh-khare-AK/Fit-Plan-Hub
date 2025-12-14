@@ -4,12 +4,11 @@ import Lbutton from "../../components/Buttons/Lbutton";
 import Eyebutton from "../../components/Buttons/Eyebutton";
 import { useEffect, useState } from "react";
 import { useToast } from "../../context/ToastContext";
-import { loginApi, GoogleSignUpApi } from "../../api/auth";
+import { loginApi } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./Login.css"
-import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode";
+
 function Login() {
     const [Password, setPassword] = useState("");
     const [Email, setEmail] = useState("");
@@ -17,7 +16,7 @@ function Login() {
     const [Disabled, setDisabled] = useState(true);
     const [eyesymbol, seteyesymbol] = useState(false);
     const { showToast } = useToast();
-    const { login, loginwithGoogle } = useAuth();
+    const { login } = useAuth();
     const navigate = useNavigate();
     useEffect(() => {
         const isValid =
@@ -64,40 +63,18 @@ function Login() {
         }
         catch (error) {
             showToast("Internal server error", "error");
-            // for developer 
             console.error(error)
         }
     }
 
-    const HandelGoogleLogin = async (Email) => {
-        try {
-            const res = await GoogleSignUpApi(Email);
-            if (!res.data.success) {
-                showToast(res.data.msg, "error");
-            }
-            else {
-                showToast(res.data.msg, "success")
-                loginwithGoogle(res.data);
-                if (res.data.Role === "Trainer") {
-                    navigate("/");
-                } else {
-                    navigate("/");
-                }
-            }
-        }
-        catch (err) {
-            console.error(err)
-            showToast("Internal Server error", "error")
-        }
-    };
     return (
         <div className="auth-page">
             <div className="auth-container">
                 <div className="auth-form">
                     <div className="auth-header">
-                        <h1 className="auth-title">Login</h1>
+                        <h1 className="auth-title">Welcome Back</h1>
                         <p className="auth-subtitle">
-                            Access your account in just a few clicks.
+                            Enter your credentials to access your account.
                         </p>
                     </div>
                     <div className="auth-input-group">
@@ -135,18 +112,7 @@ function Login() {
                             variant="primary"
                         />
                     </div>
-                    <div>
-                        <GoogleLogin
-                            onSuccess={credentialResponse => {
-                                const credentialResponseDecoded = jwtDecode(credentialResponse.credential);
-                                HandelGoogleLogin(credentialResponseDecoded.email);
-                            }}
-                            onError={() => {
-                                console.log('Login Failed');
-                            }}
-                        />
-                    </div>
-                    <br></br>
+                    
                     <div className="auth-footer">
                         <p>Don't have an account?</p>
                         <button className="auth-link-btn" onClick={() => navigate("/Register")}>Create Account</button>
@@ -154,9 +120,9 @@ function Login() {
 
                 </div>
                 <div className="auth-side">
-                    <div className="auth-side-image">
-                        {/* This will be simple, no glow-gimmick */}
-                        {/* You can add illustration, pattern, or light gradient */}
+                    <div className="auth-side-content">
+                        <h2>Transform Your Body</h2>
+                        <p>Join our community and achieve your fitness goals with expert trainers.</p>
                     </div>
                 </div>
 

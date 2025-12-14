@@ -1,27 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
 :root {
     --bg-dark: #09090B;
     --text-primary: #FAFAFA;
     --text-secondary: #A1A1AA;
     --accent-orange: #FB923C;
     --border-color: rgba(255, 255, 255, 0.1);
-    --glass-bg: rgba(250, 250, 250, 0.02);
+    --card-bg: #18181b;
 }
 
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.98);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.Register-Main-Component {
+.auth-page {
     width: 100%;
     min-height: 100vh;
     background-color: var(--bg-dark);
@@ -29,21 +24,202 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    font-family: 'Inter', sans-serif;
 }
 
-.Register-sub {
+.auth-container {
     display: flex;
     width: 100%;
-    max-width: 1100px;
+    max-width: 1000px;
     min-height: 600px;
-    /* Height thodi kam ki */
-    background: var(--glass-bg);
+    background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.5);
-    animation: fadeInScale 0.6s ease-out;
+    box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.auth-form {
+    flex: 1;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #1e1f23;
+}
+
+.auth-header {
+    margin-bottom: 32px;
+    text-align: left;
+}
+
+.auth-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.auth-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.auth-input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.auth-input-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.auth-input-group input {
+    width: 100%;
+    height: 48px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.auth-input-group input:focus {
+    border-color: var(--accent-orange);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 4px rgba(251, 146, 60, 0.1);
+}
+
+.auth-input-group input::placeholder {
+    color: rgba(161, 161, 170, 0.5);
+}
+
+.auth-input-group input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.auth-select {
+    width: 100%;
+    height: 48px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.auth-select:focus {
+    border-color: var(--accent-orange);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.auth-select option {
+    background: #1e1f23;
+    color: white;
+    padding: 10px;
+}
+
+.otp-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+.btn-otp {
+    background: transparent;
+    border: 1px solid var(--accent-orange);
+    color: var(--accent-orange);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-otp:hover {
+    background: rgba(251, 146, 60, 0.1);
+}
+
+.btn-otp:disabled {
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+}
+
+.verified-badge {
+    color: #4ade80;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.otp-container {
+    margin-top: 12px;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-password-group {
+    position: relative;
+}
+
+.auth-password-group .eye-icon {
+    position: absolute;
+    right: 12px;
+    top: 38px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.auth-submit {
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+.auth-submit button {
+    width: 100%;
+    height: 48px;
+    background: var(--accent-orange);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.auth-submit button:hover {
+    background: #f97316;
+    transform: translateY(-1px);
+}
+
+.auth-submit button:disabled {
+    background: #4b5563;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .auth-footer {
@@ -53,12 +229,13 @@
     gap: 6px;
     font-size: 14px;
     color: var(--text-secondary);
+    margin-top: auto;
 }
 
 .auth-link-btn {
     background: none;
     border: none;
-    color: var(--text-primary);
+    color: var(--accent-orange);
     font-weight: 600;
     font-size: 14px;
     cursor: pointer;
@@ -68,184 +245,61 @@
     text-decoration: underline;
 }
 
-.last-div {
-    gap: 10px;
+.auth-side {
+    flex: 1;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
+.auth-side::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1470&auto=format&fit=crop') center/cover no-repeat;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+}
 
-/* --- Left Side --- */
-.left-sub-register {
-    flex: 1;
-    padding: 40px;
-    /* Padding kam ki taaki content tight dikhe */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.auth-side-content {
     position: relative;
     z-index: 2;
-}
-
-.Register-content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    /* GAP REDUCED: 24px -> 16px */
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-/* --- Email Wrapper (Positioning Fix) --- */
-.Register-Email {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    /* GAP REDUCED */
-}
-
-.Register-Email .Email-wrapper {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.Register-Email .Email-wrapper input {
-    padding-right: 110px;
-    /* Text overlap na ho */
-}
-
-/* --- STABILITY FIX: Button Positioning --- */
-.Email-child {
-    position: absolute;
-    right: 8px;
-
-    /* FIX: Top se fixed दूरी दें, percentage (%) नहीं */
-    /* Label height (~21px) + Gap (8px) + Input padding (~5px) = 34-35px approx */
-    top: 35px;
-
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* Button Styling */
-.Email-child .l-btn {
-    height: 28px;
-    min-width: 70px;
-    padding: 0 12px;
-    font-size: 12px;
-    font-weight: 500;
-
-    /* Button visibility on autofill bg */
-    background: rgba(60, 60, 60, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #FAFAFA;
-    border-radius: 4px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.Email-child .l-btn:hover {
-    background: var(--accent-orange);
-    color: #09090B;
-    border-color: var(--accent-orange);
-}
-
-.verified {
-    font-size: 11px;
-    color: #10B981;
-    background: rgba(16, 185, 129, 0.15);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    border: 1px solid rgba(16, 185, 129, 0.2);
-}
-
-/* OTP Field Animation */
-.otp-field {
-    margin-top: 4px;
-    animation: fadeInScale 0.4s ease;
-}
-
-/* --- Password Sections --- */
-.Register-Password,
-.Register-Confirm-Password {
-    position: relative;
-}
-
-.Register-Password .eye-btn-wrapper {
-    top: 38px;
-    right: 12px;
-}
-
-/* --- Register Button --- */
-.register-button {
-    margin-top: 8px;
-}
-
-.register-button .l-btn {
-    background: linear-gradient(90deg, #FB923C 0%, #EA580C 100%);
+    padding: 40px;
+    text-align: center;
     color: white;
-    font-weight: 600;
-    font-size: 16px;
-    height: 48px;
-    box-shadow: 0 4px 15px rgba(251, 146, 60, 0.3);
 }
 
-.register-button .l-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(251, 146, 60, 0.4);
+.auth-side-content h2 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    font-style: italic;
 }
 
-/* --- Right Side Panel --- */
-.right-image-register {
-    flex: 1;
-    background: radial-gradient(circle at 50% 50%, #18181b 0%, #000000 100%);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-left: 1px solid var(--border-color);
+.auth-side-content p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
 }
 
-/* --- AUTOFILL FIX (Dark Background) --- */
-/* Ye code browser ke white background ko override karega */
-.input-box:-webkit-autofill,
-.input-box:-webkit-autofill:hover,
-.input-box:-webkit-autofill:focus,
-.input-box:-webkit-autofill:active {
-    /* Background Dark Grey Force karein */
-    -webkit-box-shadow: 0 0 0 40px #18181B inset !important;
-
-    /* Text Color White Force karein */
-    -webkit-text-fill-color: #FAFAFA !important;
-
-    caret-color: #FAFAFA;
-    transition: background-color 5000s ease-in-out 0s;
-    border-radius: 6px;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 900px) {
-    .Register-sub {
+@media (max-width: 768px) {
+    .auth-container {
         flex-direction: column;
         height: auto;
     }
-
-    .right-image-register {
+    
+    .auth-side {
         display: none;
     }
-
-    .left-sub-register {
-        padding: 30px 20px;
+    
+    .auth-form {
+        padding: 32px 24px;
     }
 }

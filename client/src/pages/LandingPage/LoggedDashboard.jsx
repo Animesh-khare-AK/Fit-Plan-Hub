@@ -33,7 +33,6 @@ function LoggedDashboard() {
                 }
             } catch (err) {
                 console.error(err);
-                // Optional: showToast("Failed to load data", "error");
             } finally {
                 setLoading(false);
             }

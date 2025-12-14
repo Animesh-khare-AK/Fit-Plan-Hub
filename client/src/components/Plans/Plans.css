@@ -113,7 +113,6 @@
   color: var(--accent-orange);
 }
 
-/* Mobile */
 @media screen and (max-width: 768px) {
   .plans-grid {
     flex-direction: column;
@@ -141,8 +140,6 @@
   position: relative;
   z-index: 1;
 }
-
-/* Plan Header with Trainer */
 
 .plan-header-card {
   display: flex;
@@ -189,8 +186,6 @@
   letter-spacing: 0.6px;
 }
 
-/* Price Section */
-
 .price-section {
   display: flex;
   flex-direction: column;
@@ -217,8 +212,6 @@
   color: #ff8a4c;
   letter-spacing: -0.4px;
 }
-
-/* Plan Details - Subscriber Only */
 
 .plan-details {
   display: flex;
@@ -251,8 +244,6 @@
   color: #f6f7fb;
   font-weight: 700;
 }
-
-/* Lock Overlay */
 
 .lock-overlay {
   position: absolute;
@@ -312,8 +303,6 @@
   transform: translateY(-2px);
   box-shadow: 0 16px 34px rgba(154, 107, 255, 0.4);
 }
-
-/* Plan Actions */
 
 .plan-actions {
   display: flex;
@@ -376,8 +365,6 @@
   box-shadow: 0 16px 34px rgba(154, 107, 255, 0.4);
 }
 
-/* Empty State */
-
 .empty-state {
   grid-column: 1 / -1;
   padding: 3rem 2rem;
@@ -386,7 +373,6 @@
   font-size: 1.05rem;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .plans-header > div {
     font-size: 2.5rem;

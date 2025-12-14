@@ -10,7 +10,6 @@ function Card({ data, user }) {
 
     const handleFollow = async (TrainerEmail, isFollowed) => {
         try {
-            // user is the email string
             const res = isFollowed
                 ? await unFollowRequest(TrainerEmail, user)
                 : await FollowRequest(TrainerEmail, user);
