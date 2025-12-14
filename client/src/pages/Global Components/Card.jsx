@@ -1,7 +1,8 @@
 import { useState } from "react";
-import Popup from "./Popup";
+import BuyPopup from "./PopUp";
 import { unFollowRequest, FollowRequest } from "../../api/auth";
 import { useToast } from "../../context/ToastContext";
+import "./Card.css"; 
 
 function Card({ data, user }) {
     const [selectedPlan, setSelectedPlan] = useState(null);
@@ -9,11 +10,14 @@ function Card({ data, user }) {
 
     const handleFollow = async (TrainerEmail, isFollowed) => {
         try {
+            // user is the email string
             const res = isFollowed
-                ? await unFollowRequest(TrainerEmail, user?.Email)
-                : await FollowRequest(TrainerEmail, user?.Email);
+                ? await unFollowRequest(TrainerEmail, user)
+                : await FollowRequest(TrainerEmail, user);
+            
             if (res.data?.success) {
                 showToast(res.data.msg, "success");
+                window.location.reload(); 
             }
         } catch (err) {
             showToast(
@@ -37,22 +41,31 @@ function Card({ data, user }) {
                 {data.map((item) => (
                     <div key={item.uuid} className="card">
                         <h3>{item.Title}</h3>
-                        <p>{item.TrainerEmail}</p>
-                        <p>₹ {item.Price}</p>
-                        <p>{item.Duration} days</p>
-
-                        {user && (
-                            <button
-                                onClick={() =>
-                                    handleFollow(item.TrainerEmail, item.isFollowed)
-                                }>
-                                {item.isFollowed ? "Unfollow" : "Follow"}
-                            </button>
+                        <p className="trainer-email">Trainer: {item.TrainerEmail}</p>
+                        <div className="card-details">
+                            <span className="price">₹ {item.Price}</span>
+                            <span className="duration">{item.Duration} days</span>
+                        </div>
+                        
+                        {item.Description && (
+                            <p className="description">{item.Description}</p>
                         )}
 
-                        <button onClick={() => handleBuy(item)}>
-                            Buy Plan
-                        </button>
+                        <div className="card-actions">
+                            {user && (
+                                <button
+                                    className={`btn-follow ${item.followed ? 'unfollow' : ''}`}
+                                    onClick={() =>
+                                        handleFollow(item.TrainerEmail, item.followed)
+                                    }>
+                                    {item.followed ? "Unfollow" : "Follow"}
+                                </button>
+                            )}
+
+                            <button className="btn-buy" onClick={() => handleBuy(item)}>
+                                Buy Plan
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>

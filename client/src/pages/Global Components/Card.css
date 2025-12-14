@@ -1,0 +1,109 @@
+.cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.card {
+    background: #2c2f33;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--orange);
+}
+
+.card h3 {
+    margin: 0;
+    color: var(--orange);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.trainer-email {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+}
+
+.duration {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.description {
+    color: #ddd;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+}
+
+.card-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.card-actions button {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.2s;
+}
+
+.btn-follow {
+    background: transparent;
+    border: 1px solid var(--orange) !important;
+    color: var(--orange);
+}
+
+.btn-follow:hover {
+    background: rgba(244, 137, 21, 0.1);
+}
+
+.btn-follow.unfollow {
+    border-color: #ff4d4d !important;
+    color: #ff4d4d;
+}
+
+.btn-follow.unfollow:hover {
+    background: rgba(255, 77, 77, 0.1);
+}
+
+.btn-buy {
+    background: var(--orange);
+    color: white;
+}
+
+.btn-buy:hover {
+    background: #d9770f;
+}

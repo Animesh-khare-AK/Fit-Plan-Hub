@@ -11,6 +11,20 @@ export const fetchDataforloggedUser = async (Email) => {
   });
 };
 
+export const fetchPurchasedPlans = async (Email) => {
+  return api.get("/api/dashboard/purchased", {
+    params: { Email },
+    withCredentials: true,
+  });
+};
+
+export const fetchFollowedTrainers = async (Email) => {
+  return api.get("/api/dashboard/subscribers", {
+    params: { Email },
+    withCredentials: true,
+  });
+};
+
 export const FollowRequest = async (EmailTrainer, EmailUser) => {
   return api.post(
     "/api/subscribe",

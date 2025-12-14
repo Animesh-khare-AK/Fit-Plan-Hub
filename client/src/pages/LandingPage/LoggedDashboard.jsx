@@ -1,49 +1,101 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import Card from "../Global Components/Card";
-import { fetchDataforloggedUser } from "../../api/auth";
+import { fetchDataforloggedUser, fetchPurchasedPlans, fetchFollowedTrainers } from "../../api/auth";
 import { useToast } from "../../context/ToastContext";
 import { useAuth } from "../../context/AuthContext";
-function LoggedDashboard() {
-    const [data, setData] = useState([]);
-    const [error, setError] = useState("");
-    const { showToast } = useToast();
-    const { user, Role } = useAuth();
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetchDataforloggedUser();
+import "./Dashboard.css";
 
-                if (res.data?.success) {
-                    setData(res.data.data);
-                } else {
-                    showToast("Failed to load data", "error");
+function LoggedDashboard() {
+    const [feedData, setFeedData] = useState([]);
+    const [purchasedData, setPurchasedData] = useState([]);
+    const [followingData, setFollowingData] = useState([]);
+    const [activeTab, setActiveTab] = useState("feed");
+    const [loading, setLoading] = useState(false);
+    
+    const { showToast } = useToast();
+    const { user } = useAuth();
+
+    useEffect(() => {
+        if (!user) return;
+
+        const loadData = async () => {
+            setLoading(true);
+            try {
+                if (activeTab === "feed") {
+                    const res = await fetchDataforloggedUser(user);
+                    if (res.data?.success) setFeedData(res.data.list);
+                } else if (activeTab === "purchased") {
+                    const res = await fetchPurchasedPlans(user);
+                    if (res.data?.success) setPurchasedData(res.data.list);
+                } else if (activeTab === "following") {
+                    const res = await fetchFollowedTrainers(user);
+                    if (res.data?.success) setFollowingData(res.data.list);
                 }
             } catch (err) {
-                if (err.response) {
-                    showToast(
-                        err.response.data?.msg || "Request failed",
-                        "error"
-                    );
-                } else {
-                    showToast("Network error", "error");
-                }
-                setError("Unable to fetch data");
+                console.error(err);
+                // Optional: showToast("Failed to load data", "error");
+            } finally {
+                setLoading(false);
             }
         };
 
-        if (user) {
-            fetchData();
-        }
-    }, [user]);
+        loadData();
+    }, [user, activeTab]);
 
     return (
         <div className="Main-Container">
-            <Card
-                user={user}
-                data={data}
-            />
+            <div className="dashboard-tabs">
+                <button 
+                    className={activeTab === "feed" ? "active" : ""} 
+                    onClick={() => setActiveTab("feed")}
+                >
+                    Feed
+                </button>
+                <button 
+                    className={activeTab === "purchased" ? "active" : ""} 
+                    onClick={() => setActiveTab("purchased")}
+                >
+                    Purchased Plans
+                </button>
+                <button 
+                    className={activeTab === "following" ? "active" : ""} 
+                    onClick={() => setActiveTab("following")}
+                >
+                    Following
+                </button>
+            </div>
 
-            {error && <p className="error">{error}</p>}
+            {loading ? (
+                <div className="loading" style={{textAlign: 'center', color: 'white', marginTop: '2rem'}}>Loading...</div>
+            ) : (
+                <div className="dashboard-content">
+                    {activeTab === "feed" && (
+                        <Card user={user} data={feedData} />
+                    )}
+                    
+                    {activeTab === "purchased" && (
+                        purchasedData.length > 0 ? (
+                            <Card user={user} data={purchasedData} />
+                        ) : (
+                            <p className="no-data">You haven't purchased any plans yet.</p>
+                        )
+                    )}
+
+                    {activeTab === "following" && (
+                        <div className="following-list">
+                            {followingData.length > 0 ? (
+                                followingData.map((trainer, index) => (
+                                    <div key={index} className="trainer-item">
+                                        <span>{trainer}</span>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="no-data">You are not following any trainers.</p>
+                            )}
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 }

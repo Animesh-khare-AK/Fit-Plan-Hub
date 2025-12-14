@@ -17,8 +17,8 @@ function sortDataTOSuscribe(data, List) {
   });
 }
 const UserDashBoardLoggedUser = async (req, res) => {
-  const { Email } = req.params;
-  if (!isValidEmail) {
+  const { Email } = req.query;
+  if (!isValidEmail(Email)) {
     return res.status(400).json({
       success: false,
       msg: "Invalid request",
@@ -26,19 +26,18 @@ const UserDashBoardLoggedUser = async (req, res) => {
   }
   // now fetch trainer  to which the user suscribed  and exclude the purchased flan then follwed by the
 
-  const SusbribedTrainers = await Suscription.findOne(
+  let SusbribedTrainers = await Suscription.findOne(
     { Email: Email },
     { SuscribedTrainer: 1, Suscribed: 1, _id: 0 }
   );
 
+  // If no subscription record exists, treat as empty
   if (!SusbribedTrainers) {
-    return res.status(500).json({
-      success: false,
-      msg: "Internal Error",
-    });
+    SusbribedTrainers = { SuscribedTrainer: [] };
   }
+
   try {
-    const SusbribedTrainersList = SusbribedTrainers.SuscribedTrainer;
+    const SusbribedTrainersList = SusbribedTrainers.SuscribedTrainer || [];
     let suscribe = true;
     let SuscribeList = [];
     if (SusbribedTrainersList.length === 0) {
@@ -100,26 +99,26 @@ const UserDashBoardUnLoggedUser = async (req, res) => {
 };
 
 const showSuscriberlist = async (req, res) => {
-  const { Email } = req.params;
+  const { Email } = req.query;
 
-  if (!isValidEmail) {
+  if (!isValidEmail(Email)) {
     return res.status(400).json({
       success: false,
       msg: "Bad Request",
     });
   }
 
-  const Suscriberlist = await Suscription.find({ Email: Email });
+  const Suscriberlist = await Suscription.findOne({ Email: Email });
 
   return res.status(200).json({
     success: true,
     msg: "Suscriber list fetched",
-    list: Suscriberlist.SuscribedTrainer,
+    list: Suscriberlist ? Suscriberlist.SuscribedTrainer : [],
   });
 };
 
 const showpurchasedplan = async (req, res) => {
-  const { Email } = req.params;
+  const { Email } = req.query;
 
   if (!isValidEmail(Email)) {
     return res.status(400).json({
@@ -134,16 +133,17 @@ const showpurchasedplan = async (req, res) => {
     );
 
     if (!findAllpurchasedPlan) {
-      return res.status(404).json({
-        success: false,
+      return res.status(200).json({
+        success: true,
         msg: "No Active Plan Found ",
+        list: [],
       });
     }
     //Array of object we recieved // convert karna pdeg
     const planId = findAllpurchasedPlan.map((id) => id.TrainerPlanId);
     // all planId received  , now with this i want to fecth all details of the Trainerschema
     const Planlist = await TrainerPlan.find({
-      uuid: { _in: planId },
+      uuid: { $in: planId },
     }).lean();
 
     return res.status(200).json({
@@ -161,9 +161,10 @@ const showpurchasedplan = async (req, res) => {
 };
 
 const ShowDescription = async (req, res) => {
-  const { TrainerPlanId, Email } = req.params;
+  const { uuid } = req.params;
+  const { Email } = req.query;
 
-  if (!isValidEmail || !TrainerPlanId) {
+  if (!isValidEmail(Email) || !uuid) {
     return res.status(400).json({
       success: false,
       msg: "Invalid request",
@@ -171,7 +172,7 @@ const ShowDescription = async (req, res) => {
   }
   try {
     const findvalidity = await purchased.findOne(
-      { PurchasedBy: Email, TrainerPlanId: TrainerPlanId },
+      { PurchasedBy: Email, TrainerPlanId: uuid },
       { ValidityUpto: 1, _id: 0 }
     );
     if (!findvalidity) {
@@ -187,7 +188,7 @@ const ShowDescription = async (req, res) => {
         msg: "Validity Expires",
       });
     } else {
-      const content = await TrainerPlan.findOne({ uuid: TrainerPlanId });
+      const content = await TrainerPlan.findOne({ uuid: uuid });
       return res.status(200).json({
         success: true,
         msg: "Success",

@@ -10,7 +10,8 @@ function BuyPopup({ plan, user, onClose }) {
     const handleBuy = async () => {
         setDisabled(true);
         try {
-            const res = await buyProduct(otp, user?.Email, plan.uuid);
+            // user is the email string
+            const res = await buyProduct(otp, user, plan.uuid);
 
             if (res.data?.success) {
                 showToast(res.data.msg, "success");

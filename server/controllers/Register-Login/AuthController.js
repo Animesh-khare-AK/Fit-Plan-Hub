@@ -167,6 +167,14 @@ const GoogleSignUpIN = async (req, res) => {
       });
 
       await newRegister.save();
+
+      // Create Subscription entry for new Google users
+      const newSuscription = new SuscriptionList({
+        uuid: unique_id,
+        Email: Email,
+        SuscribedTrainer: [],
+      });
+      await newSuscription.save();
     }
     const accessToken = generateAccessToken(unique_id);
     const refreshToken = generateRefreshToken(unique_id);

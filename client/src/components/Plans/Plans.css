@@ -45,31 +45,31 @@
   flex-direction: column;
   background-color: var(--gray);
   color: white;
-  gap: 2rem;
-  padding: 1.5rem;
-  width: 20rem;
+  gap: 1.2rem;
+  padding: 1rem;
+  width: 16rem;
   border-radius: 0.5rem;
   transition: 0.3s;
 }
 
 .plan-card:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   background: var(--gradient-primary);
 }
 
 .plan-card svg {
   fill: var(--accent-orange);
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .plan-title {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .price-section {
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: bold;
 }
 

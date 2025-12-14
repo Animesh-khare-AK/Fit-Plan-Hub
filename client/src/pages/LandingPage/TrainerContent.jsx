@@ -235,7 +235,6 @@ function TrainerContent() {
             </div>
 
             <Reasons />
-            {/* <Footer /> Footer is handled by Dashboard.jsx */}
         </div>
     );
 }
