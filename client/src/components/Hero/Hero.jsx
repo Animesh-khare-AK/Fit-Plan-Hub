@@ -1,6 +1,10 @@
 import React from 'react'
 import './Hero.css'
 import { motion } from 'framer-motion'
+import HeroImage from '../../assets/hero_image.png'
+import HeroImageBack from '../../assets/hero_image_back.png'
+import Heart from '../../assets/heart.png'
+import Calories from '../../assets/calories.png'
 
 const Hero = ({ onGetStarted, onLearnMore }) => {
   const stats = [
@@ -13,90 +17,83 @@ const Hero = ({ onGetStarted, onLearnMore }) => {
     <section className='hero' id='home'>
       <div className='hero-container'>
         <div className='hero-content'>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            THE BEST <span className='highlight'>FITNESS CLUB</span> IN THE TOWN
-          </motion.h1>
+          <div className="the-best-ad">
+            <motion.div
+              initial={{ left: '238px' }}
+              whileInView={{ left: '8px' }}
+              transition={{ duration: 3, type: 'tween' }}
+            ></motion.div>
+            <span>THE BEST Place For Fitness</span>
+          </div>
 
-          <motion.p
-            className='hero-subtitle'
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            SHAPE YOUR <span className='highlight-text'>IDEAL BODY</span>
-          </motion.p>
-
-          <motion.p
-            className='hero-description'
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            In here we will help you to shape and build your ideal body and live up your life to fullest
-          </motion.p>
+          <div className="hero-text">
+            <div>
+              <span className='stroke-text'>SHAPE </span>
+              <span>YOUR</span>
+            </div>
+            <div>
+              <span>IDEAL BODY</span>
+            </div>
+            <div>
+              <span>
+                In here we will help you to shape and build your ideal body and live up your life to fullest
+              </span>
+            </div>
+          </div>
 
           {/* Stats */}
-          <motion.div
-            className='hero-stats'
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+          <div className="figures">
             {stats.map((stat, idx) => (
-              <div key={idx} className='stat-box'>
-                <div className='stat-number'>{stat.number}</div>
-                <div className='stat-label'>{stat.label}</div>
+              <div key={idx}>
+                <span>{stat.number}</span>
+                <span>{stat.label}</span>
               </div>
             ))}
-          </motion.div>
+          </div>
 
           {/* CTA Buttons */}
-          <motion.div
-            className='hero-cta'
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <button className='btn-primary' onClick={onGetStarted}>
-              Get Started
-            </button>
-            <button className='btn-secondary' onClick={onLearnMore}>
-              Learn More
-            </button>
-          </motion.div>
+          <div className="hero-buttons">
+            <button className='btn' onClick={onGetStarted}>Get Started</button>
+            <button className='btn' onClick={onLearnMore}>Learn More</button>
+          </div>
         </div>
 
-        {/* Heart Rate & Calories Stats */}
-        <motion.div
-          className='hero-vitals'
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <div className='vital-card'>
-            <div className='vital-icon'>❤️</div>
-            <div className='vital-content'>
-              <div className='vital-value'>116 bpm</div>
-              <div className='vital-label'>Heart Rate</div>
-            </div>
-          </div>
-          <div className='vital-card'>
-            <div className='vital-icon'>🔥</div>
-            <div className='vital-content'>
-              <div className='vital-value'>220 kcal</div>
-              <div className='vital-label'>Calories Burned</div>
-            </div>
-          </div>
-        </motion.div>
-      </div>
+        {/* Right Side */}
+        <div className="right-h">
+          
+          <motion.div
+            initial={{ right: '-1rem' }}
+            whileInView={{ right: '4rem' }}
+            transition={{ duration: 3, type: 'tween' }}
+            className="heart-rate"
+          >
+            <img src={Heart} alt="" />
+            <span>Heart Rate</span>
+            <span>116 bpm</span>
+          </motion.div>
 
-      {/* Background gradient blobs */}
-      <div className='hero-blob hero-blob-1'></div>
-      <div className='hero-blob hero-blob-2'></div>
+          <img src={HeroImage} alt="" className='hero-image' />
+          <motion.img
+            initial={{ right: '11rem' }}
+            whileInView={{ right: '20rem' }}
+            transition={{ duration: 3, type: 'tween' }}
+            src={HeroImageBack} alt="" className='hero-image-back'
+          />
+
+          <motion.div
+            initial={{ right: '37rem' }}
+            whileInView={{ right: '28rem' }}
+            transition={{ duration: 3, type: 'tween' }}
+            className="calories"
+          >
+            <img src={Calories} alt="" />
+            <div>
+              <span>Calories Burned</span>
+              <span>220 kcal</span>
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </section>
   )
 }

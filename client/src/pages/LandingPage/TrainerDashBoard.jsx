@@ -1,9 +1,9 @@
 import Navbar from "../Global Components/Navbar"
-import Trainer from "./TrainerContent"
+import TrainerContent from "./TrainerContent";
 function TrainerDashboard() {
     return (
         <div className="Main-container">
-            <Trainer />
+            <TrainerContent />
         </div>
     )
 }

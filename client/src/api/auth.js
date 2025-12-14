@@ -35,13 +35,28 @@ export const buyProduct = async (validationcode, Email, TrainerPlanId) => {
   );
 };
 
-export const uploadnewPlans = async () => {};
+export const uploadnewPlans = async (data) => {
+  return api.post("/api/trainer/create-plan", data, { withCredentials: true });
+};
 
-export const editExitingPlan = async () => {};
+export const editExitingPlan = async (id, data) => {
+  return api.put(`/api/trainer/update-plan/${id}`, data, {
+    withCredentials: true,
+  });
+};
 
-export const deletePlan = async () => {};
+export const deletePlan = async (id) => {
+  return api.delete(`/api/trainer/delete-plan/${id}`, {
+    withCredentials: true,
+  });
+};
 
-export const getAllPlans = async () => {};
+export const getAllPlans = async (email) => {
+  return api.get("/api/trainer/get-plans", {
+    params: { email },
+    withCredentials: true,
+  });
+};
 
 export const loginApi = async (Email, Password) => {
   return api.post("/api/login", { Email, Password });

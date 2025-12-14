@@ -4,11 +4,12 @@ import Lbutton from "../../components/Buttons/Lbutton";
 import Eyebutton from "../../components/Buttons/Eyebutton";
 import { useEffect, useState } from "react";
 import { useToast } from "../../context/ToastContext";
-import { loginApi } from "../../api/auth";
+import { loginApi, GoogleSignUpApi } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./Login.css"
 import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 function Login() {
     const [Password, setPassword] = useState("");
     const [Email, setEmail] = useState("");
@@ -54,7 +55,12 @@ function Login() {
             }
             login(res.data);
             showToast(res.data.msg, "success");
-            navigate("/");
+            
+            if (res.data.Role === "Trainer") {
+                navigate("/");
+            } else {
+                navigate("/");
+            }
         }
         catch (error) {
             showToast("Internal server error", "error");
@@ -72,11 +78,10 @@ function Login() {
             else {
                 showToast(res.data.msg, "success")
                 loginwithGoogle(res.data);
-                if (res.data.Role == "User") {
-                    navigate("/")
-                }
-                else {
-                    navigate("/")
+                if (res.data.Role === "Trainer") {
+                    navigate("/");
+                } else {
+                    navigate("/");
                 }
             }
         }
@@ -134,7 +139,7 @@ function Login() {
                         <GoogleLogin
                             onSuccess={credentialResponse => {
                                 const credentialResponseDecoded = jwtDecode(credentialResponse.credential);
-                                HandelGoogleLogin(credentialResponseDecoded);
+                                HandelGoogleLogin(credentialResponseDecoded.email);
                             }}
                             onError={() => {
                                 console.log('Login Failed');

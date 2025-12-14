@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-import Navbar from "../Global Components/Navbar";
 import Card from "../Global Components/Card";
 import { fetchDataforloggedUser } from "../../api/auth";
 import { useToast } from "../../context/ToastContext";

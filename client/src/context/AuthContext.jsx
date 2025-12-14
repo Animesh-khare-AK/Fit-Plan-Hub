@@ -3,7 +3,7 @@ import api from "../api/axios";
 import { useNavigate } from "react-router-dom"
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(sessionStorage.getItem("user")) || null;
+    const [user, setUser] = useState(sessionStorage.getItem("user") || null);
     const [role, Setrole] = useState(sessionStorage.getItem("role") || null);
     const navigate = useNavigate();
     const refreshAccessToken = async (refreshToken) => {
@@ -53,16 +53,15 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         setUser(null);
+        Setrole(null);
         sessionStorage.removeItem("user");
         sessionStorage.removeItem("accessToken");
-        sessionStorage.removeItem("role", userData.Role)
+        sessionStorage.removeItem("role");
         navigate("/");
     };
 
-
-
     return (
-        <AuthContext.Provider value={{ user, login, logout, loginwithGoogle, Register }}>
+        <AuthContext.Provider value={{ user, role, login, logout, loginwithGoogle, Register }}>
             {children}
         </AuthContext.Provider>
     );

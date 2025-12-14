@@ -1,16 +1,28 @@
-# React + Vite
+# Fit Plan Hub - Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
 
-Currently, two official plugins are available:
+Fit Plan Hub is a fitness application designed to help users shape their ideal body with expert coaches and personalized plans.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Styling Approach
 
-## React Compiler
+The application utilizes a modular CSS architecture where styling is decoupled into component-specific files, ensuring maintainability and clear separation of concerns. A central global stylesheet defines core design tokens—such as color palettes and gradients—using CSS variables, allowing for consistent theming across the platform. Layouts are constructed using modern Flexbox and Grid systems to ensure responsiveness, while class naming conventions are strictly followed to prevent style leakage in the global scope. This approach balances the simplicity of standard CSS with the organizational benefits of a component-based structure.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Global Variables & Theming
 
-## Expanding the ESLint configuration
+The file `App.css` defines global CSS variables in the `:root` pseudo-class. This allows colors and gradients to be reused across the entire application, making it easy to change the theme in one place.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Component-Specific Files
+
+Each React component has a dedicated CSS file located in the same folder (e.g., `Hero.jsx` imports `Hero.css`). These files are imported directly into the component.
+
+### Layout & Responsiveness
+
+The project relies heavily on Flexbox (`display: flex`) for layout structure. Media queries are used within these CSS files to handle responsiveness for mobile devices.
+
+## Scripts
+
+- `npm run dev`: Start the development server
+- `npm run build`: Build for production
+- `npm run lint`: Run ESLint
+- `npm run preview`: Preview the production build

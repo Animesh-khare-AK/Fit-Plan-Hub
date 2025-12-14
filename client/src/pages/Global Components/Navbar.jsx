@@ -14,16 +14,16 @@ const Navbar = () => {
                 {/* Logo & Brand */}
                 <div className="nav-brand" onClick={() => navigate("/")}>
                     <div className="nav-mark">
-                        <img src={Logo} alt="Debugging Engines" />
+                        <img src={Logo} alt="Fit Plan Hub" />
                     </div>
-                    <span className="brand-name">Debugging Engines</span>
+                    <span className="brand-name">Fit Plan Hub</span>
                 </div>
 
                 {/* Links */}
                 <div className="nav-links">
-                    <a href="#about" className="nav-item">About</a>
+                    <a href="#home" className="nav-item">Home</a>
                     <a href="#plans" className="nav-item">Plans</a>
-                    <a href="#footer" className="nav-item">Contact</a>
+                    <a href="#reasons" className="nav-item">Reasons</a>
                 </div>
 
                 {/* User Action Section */}
@@ -33,7 +33,7 @@ const Navbar = () => {
                             <span className="username">Hi, {user}</span>
                             <div className="avatar-circle">
                                 {/* User Image or Initials */}
-                                <img src="/path-to-user.jpg" alt="User" />
+                                <img src={`https://api.dicebear.com/7.x/initials/svg?seed=${user}`} alt="User" />
                             </div>
                             <button
                                 className="btn-logout"
@@ -43,12 +43,14 @@ const Navbar = () => {
                             </button>
                         </div>
                     ) : (
-                        <button
-                            className="btn-login"
-                            onClick={() => navigate("/Login")}
-                        >
-                            Login
-                        </button>
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <button
+                                className="btn-login"
+                                onClick={() => navigate("/Login")}
+                            >
+                                Login
+                            </button>
+                        </div>
                     )}
                 </div>
 

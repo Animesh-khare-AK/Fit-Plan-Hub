@@ -1,126 +1,58 @@
 import React from 'react'
 import './Plans.css'
-import { motion } from 'framer-motion'
+import whiteTick from '../../assets/whiteTick.png'
 
 const Plans = ({ data = [], user, onLogin }) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut'
-      }
-    }
-  }
-
-  const isSubscribed = user?.subscription || false
-
   return (
     <div className='plans-section' id='plans'>
       <div className='plans-header'>
-        <span>PREMIUM TRAINING</span>
+        <span style={{color: 'var(--accent-orange)', fontWeight: 'bold'}}>READY TO START</span>
         <div>
-          <span className='stroke-test'>expert </span>
-          <span>trainer plans</span>
+          <span className='stroke-text'>YOUR </span>
+          <span>JOURNEY</span>
         </div>
-        <p>Transform your fitness journey with personalized plans from industry experts</p>
+        <span style={{color: 'white', fontSize: '1rem', textTransform: 'none', fontWeight: '200'}}>
+            Choose the best plan for you
+        </span>
       </div>
 
-      <motion.div
-        className='plans-grid'
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        {data.map((plan) => (
-          <motion.div key={plan.uuid} className='plan-card' variants={itemVariants}>
-            {/* Lock Icon for Non-Subscribers */}
-            {!isSubscribed && (
-              <div className='lock-overlay'>
-                <div className='lock-content'>
-                  <div className='lock-icon'>🔒</div>
-                  <p>Subscribe to unlock</p>
-                  <button onClick={onLogin} className='unlock-btn'>
-                    View Full Details
-                  </button>
-                </div>
-              </div>
-            )}
+      {data.length === 0 ? (
+        <div className="no-plans">
+          <span>No Plans Available</span>
+        </div>
+      ) : (
+        <div className='plans-grid'>
+          {data.map((plan, i) => (
+            <div className='plan-card' key={i}>
+              {/* Icon */}
+              <svg viewBox="0 0 24 24">
+                  <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22 14.86 20.57 16.29 22 18.43 19.86 19.86 21.29 21.29 19.86l-1.43-1.43 1.43-1.43-1.43-1.43-1.43 1.43zM6 6l-3 3 3 3 3-3-3-3zm12 12l-3 3 3 3 3-3-3-3z" />
+              </svg>
+              
+              <span className='plan-title'>{plan.Title}</span>
+              <span className='price-section'>₹ {plan.Price}</span>
 
-            {/* Plan Header with Trainer Info */}
-            <div className='plan-header-card'>
-              <div className='trainer-avatar'>
-                {plan.TrainerName?.charAt(0).toUpperCase() || '👨'}
+              <div className='plan-details'>
+                  <div className='detail-item'>
+                      <img src={whiteTick} alt="" />
+                      <span>{plan.Duration} Days Duration</span>
+                  </div>
+                  <div className='detail-item'>
+                      <img src={whiteTick} alt="" />
+                      <span>{plan.Description ? plan.Description.substring(0, 30) + '...' : 'Full Body Focus'}</span>
+                  </div>
+                  <div className='detail-item'>
+                      <img src={whiteTick} alt="" />
+                      <span>Trainer: {plan.TrainerName || 'Expert'}</span>
+                  </div>
               </div>
-              <div className='trainer-info'>
-                <h3 className='plan-title'>{plan.Title}</h3>
-                <p className='trainer-name'>{plan.TrainerName || plan.TrainerEmail}</p>
+
+              <div className="plan-actions">
+                  <span style={{fontSize: '0.8rem', cursor: 'pointer'}}>See more benefits -> </span>
+                  <button className='btn-join' onClick={onLogin}>Join now</button>
               </div>
             </div>
-
-            {/* Price Section - Always Visible */}
-            <div className='price-section'>
-              <span className='price-label'>Starting at</span>
-              <span className='price'>₹{plan.Price}</span>
-            </div>
-
-            {/* Details - Only for Subscribers */}
-            {isSubscribed && (
-              <motion.div 
-                className='plan-details'
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                <div className='detail-item'>
-                  <span className='detail-label'>Duration</span>
-                  <span className='detail-value'>{plan.Duration} days</span>
-                </div>
-                <div className='detail-item'>
-                  <span className='detail-label'>Focus Area</span>
-                  <span className='detail-value'>Full Body</span>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Action Buttons */}
-            <div className='plan-actions'>
-              {user ? (
-                <>
-                  <button className='btn-secondary'>
-                    {plan.isFollowed ? '✓ Following' : '+ Follow'}
-                  </button>
-                  <button className='btn-primary'>
-                    {isSubscribed ? 'Purchase' : 'Subscribe'}
-                  </button>
-                </>
-              ) : (
-                <button className='btn-primary btn-login' onClick={onLogin}>
-                  Sign In to View
-                </button>
-              )}
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {data.length === 0 && (
-        <div className='empty-state'>
-          <p>No trainer plans available at the moment</p>
+          ))}
         </div>
       )}
     </div>

@@ -58,11 +58,6 @@ function UnloggedDashboard() {
             <Hero onGetStarted={handleGetStarted} onLearnMore={handleLearnMore} />
             
             <div className="dashboard-container">
-                <div className="dashboard-header">
-                    <h1>Explore Our <span className="highlight">Premium Plans</span></h1>
-                    <p>Choose from expert-crafted training plans designed to transform your fitness journey.</p>
-                </div>
-
                 {error ? (
                     <div className="error-container">
                         <p className="error">{error}</p>

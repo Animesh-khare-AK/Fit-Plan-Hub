@@ -1,103 +1,128 @@
-.reasons {
-  position: relative;
-  padding: 5rem 1.5rem;
-  background: radial-gradient(circle at 80% 20%, rgba(154, 107, 255, 0.1), transparent 45%),
-              radial-gradient(circle at 10% 80%, rgba(255, 138, 76, 0.1), transparent 40%),
-              #050814;
-  overflow: hidden;
+.Reasons {
+    padding: 0 2rem;
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 5rem;
 }
 
-.reasons-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
+.left-r {
+    flex: 1 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    grid-auto-rows: 1fr;
 }
 
-.reasons-header {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  text-align: center;
-  margin-bottom: 4rem;
+.left-r>img {
+    object-fit: cover;
 }
 
-.section-label {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #94a3b8;
-  text-transform: uppercase;
-  letter-spacing: 1.4px;
+.left-r>img:nth-child(1) {
+    width: 12rem;
+    grid-row: 1/3;
+    height: 28rem;
 }
 
-.reasons-header h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 900;
-  color: #f8f9ff;
-  line-height: 1.2;
+.left-r>img:nth-child(2) {
+    width: auto;
+    height: 16rem;
+    grid-column: 2/4;
 }
 
-.reasons-header h2 .highlight {
-  background: linear-gradient(120deg, #ff8a4c 0%, #ff5b84 50%, #9a6bff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.left-r>img:nth-child(3) {
+    width: 14rem;
+    grid-row: 2;
+    grid-column: 2/3;
 }
 
-.reasons-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
+.left-r>img:nth-child(4) {
+    width: 10rem;
+    grid-row: 2;
+    grid-column: 3/4;
+    height: 11.2rem;
 }
 
-.reason-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 2.5rem 2rem;
-  background: radial-gradient(circle at 20% 10%, rgba(255, 138, 76, 0.15), transparent 55%),
-              radial-gradient(circle at 80% 20%, rgba(154, 107, 255, 0.15), transparent 60%),
-              rgba(15, 19, 32, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+.right-r {
+    flex: 1 1;
+    text-transform: uppercase;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
-.reason-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 138, 76, 0.2), rgba(154, 107, 255, 0.2));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 0;
+.right-r>span {
+    font-weight: bold;
+    color: var(--accent-orange);
 }
 
-.reason-card > * {
-  position: relative;
-  z-index: 1;
+.right-r>div {
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
 }
 
-.reason-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(255, 138, 76, 0.3);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+.details-r {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.reason-card:hover::before {
-  opacity: 1;
+.details-r>div {
+    display: flex;
+    font-size: 1rem;
+    gap: 1rem;
 }
 
-.reason-icon {
-  font-size: 2.8rem;
-  width: 70px;
-  height: 70px;
+.details-r>div>img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.partners {
+    display: flex;
+    gap: 1rem;
+}
+
+.partners img {
+    width: 2.5rem;
+}
+
+@media screen and (max-width: 768px) {
+    .Reasons {
+        flex-direction: column;
+    }
+
+    .left-r {
+        grid-template-columns: repeat(2, 1fr);
+        /* Simplified grid for mobile */
+    }
+
+    .left-r>img:nth-child(1) {
+        width: 100%;
+        height: auto;
+        grid-row: auto;
+    }
+
+    .left-r>img:nth-child(2) {
+        width: 100%;
+        height: auto;
+        grid-column: auto;
+    }
+
+    .left-r>img:nth-child(3) {
+        width: 100%;
+        height: auto;
+        grid-row: auto;
+        grid-column: auto;
+    }
+
+    .left-r>img:nth-child(4) {
+        width: 100%;
+        height: auto;
+        grid-row: auto;
+        grid-column: auto;
+    }
+}
   display: flex;
   align-items: center;
   justify-content: center;
