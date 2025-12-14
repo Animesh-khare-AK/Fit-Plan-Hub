@@ -40,8 +40,6 @@ const Hero = ({ onGetStarted, onLearnMore }) => {
               </span>
             </div>
           </div>
-
-          {/* Stats */}
           <div className="figures">
             {stats.map((stat, idx) => (
               <div key={idx}>
@@ -51,14 +49,12 @@ const Hero = ({ onGetStarted, onLearnMore }) => {
             ))}
           </div>
 
-          {/* CTA Buttons */}
           <div className="hero-buttons">
             <button className='btn' onClick={onGetStarted}>Get Started</button>
             <button className='btn' onClick={onLearnMore}>Learn More</button>
           </div>
         </div>
 
-        {/* Right Side */}
         <div className="right-h">
           
           <motion.div
@@ -71,31 +67,23 @@ const Hero = ({ onGetStarted, onLearnMore }) => {
             <span>Heart Rate</span>
             <span>116 bpm</span>
           </motion.div>
-
-          <img src={HeroImage} alt="" className='hero-image' />
-          <motion.img
-            initial={{ right: '11rem' }}
+         <img src={HeroImage} alt="" className='hero-image' />
+         <motion.img
+          initial={{ right: '11rem' }}
             whileInView={{ right: '20rem' }}
             transition={{ duration: 3, type: 'tween' }}
-            src={HeroImageBack} alt="" className='hero-image-back'
-          />
-
-          <motion.div
-            initial={{ right: '37rem' }}
-            whileInView={{ right: '28rem' }}
-            transition={{ duration: 3, type: 'tween' }}
-            className="calories"
-          >
-            <img src={Calories} alt="" />
-            <div>
-              <span>Calories Burned</span>
+           src={HeroImageBack} alt="" className='hero-image-back'/>
+        <motion.div
+          initial={{ right: '37rem' }}            whileInView={{ right: '28rem' }}
+      transition={{ duration: 3, type: 'tween' }}
+          className="calories">
+          <img src={Calories} alt="" />
+          <div>
+            <span>Calories Burned</span>
               <span>220 kcal</span>
             </div>
           </motion.div>
         </div>
       </div>
-    </section>
-  )
-}
-
+    </section>)}
 export default Hero

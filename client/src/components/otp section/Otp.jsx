@@ -62,8 +62,6 @@ function Otp({ length = 6, isActive, onComplete, onResend }) {
                 }
             </div>
 
-        </div>
-    );
-}
-
+      </div>
+    );}
 export default Otp;

@@ -5,12 +5,9 @@ function Lbutton({ text, hadleButtonclick, disabled, variant }) {
             <button
                 onClick={hadleButtonclick}
                 disabled={disabled}
-                className="l-btn"
-            >
+                className="l-btn">
                 {text}
             </button>
         </div>
-    );
-}
-
+    );}
 export default Lbutton 

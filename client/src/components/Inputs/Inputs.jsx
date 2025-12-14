@@ -12,21 +12,15 @@ function Input({
     return (
         <div className="input-wrapper">
             {label && <label className="input-label">{label}</label>}
-
-            <input
-                type={type}
+           <input
+               type={type}
                 value={value}
                 onChange={onChange}
-                placeholder={placeholder}
+               placeholder={placeholder}
                 disabled={disabled ? true : undefined}
-                className={`input-box ${error ? "input-error" : ""}`}
-            />
-
+                className={`input-box ${error ? "input-error" : ""}`}/>
             {error && <p className="error-text">{error}</p>}
-        </div>
-    );
-}
-
+        </div>);}
 export default Input
 
 

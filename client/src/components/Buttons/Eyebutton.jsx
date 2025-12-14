@@ -10,7 +10,5 @@ function Eyebutton({ hadleButtonclick, variant, seen }) {
                 {seen === "false" ? "Show" : "Hide"}
             </button>
         </div>
-    );
-}
-
+);}
 export default Eyebutton;

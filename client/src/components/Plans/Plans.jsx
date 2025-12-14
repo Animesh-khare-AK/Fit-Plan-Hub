@@ -33,24 +33,22 @@ const Plans = ({ data = [], user, onLogin }) => {
               <span className='price-section'>₹ {plan.Price}</span>
 
               <div className='plan-details'>
-                  <div className='detail-item'>
-                      <img src={whiteTick} alt="" />
+                  <div className='detail-item'>                      
+                    <img src={whiteTick} alt="" />
                       <span>{plan.Duration} Days Duration</span>
-                  </div>
-                  <div className='detail-item'>
-                      <img src={whiteTick} alt="" />
-                      <span>{plan.Description ? plan.Description.substring(0, 30) + '...' : 'Full Body Focus'}</span>
-                  </div>
-                  <div className='detail-item'>
-                      <img src={whiteTick} alt="" />
-                      <span>Trainer: {plan.TrainerName || 'Expert'}</span>
-                  </div>
-              </div>
-
-              <div className="plan-actions">
-                  <span style={{fontSize: '0.8rem', cursor: 'pointer'}}>See more benefits -&gt; </span>
-                  <button className='btn-join' onClick={onLogin}>Join now</button>
-              </div>
+                </div>
+              <div className='detail-item'>
+                    <img src={whiteTick} alt="" />
+                  <span>{plan.Description ? plan.Description.substring(0, 30) + '...' : 'Full Body Focus'}</span>
+                </div>
+                <div className='detail-item'>
+                    <img src={whiteTick} alt="" />
+                    <span>Trainer: {plan.TrainerName || 'Expert'}</span>
+                  </div>              </div>
+            <div className="plan-actions">
+                <span style={{fontSize: '0.8rem', cursor: 'pointer'}}>See more benefits -&gt; </span>
+                <button className='btn-join' onClick={onLogin}>Join now</button>
+             </div>
             </div>
           ))}
         </div>
