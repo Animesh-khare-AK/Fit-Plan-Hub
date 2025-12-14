@@ -48,7 +48,7 @@ const Plans = ({ data = [], user, onLogin }) => {
               </div>
 
               <div className="plan-actions">
-                  <span style={{fontSize: '0.8rem', cursor: 'pointer'}}>See more benefits -> </span>
+                  <span style={{fontSize: '0.8rem', cursor: 'pointer'}}>See more benefits -&gt; </span>
                   <button className='btn-join' onClick={onLogin}>Join now</button>
               </div>
             </div>
